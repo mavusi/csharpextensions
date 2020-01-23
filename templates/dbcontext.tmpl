@@ -1,0 +1,17 @@
+namespace @namespace@
+{
+    public class @classname@Context : DbContext
+    {
+        public DbSet<@classname@> @classname@s { get; set; }
+        ${cursor}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TestDb;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<@classname@>().HasIndex(x => x.AgregateRootId);
+        }
+    }
+}

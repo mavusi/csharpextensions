@@ -1,4 +1,4 @@
-This is a fork of https://github.com/jchannon/csharpextensions seeing as that extension is no longer under development and I thought it was worth keeping it alive. WHile the current functionality is pretty basic, it provides a solid foundation for future additions.
+# ***** *PROJECT NO LONGER UNDER DEVELOPMENT* *****
 
 # C# Extensions
 

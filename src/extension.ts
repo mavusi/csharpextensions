@@ -31,6 +31,8 @@ export function activate(context: vscode.ExtensionContext) {
 
     //context.subscriptions.push(disposable);
     context.subscriptions.push(vscode.commands.registerCommand('csharpextensions.createClass', createClass));
+    context.subscriptions.push(vscode.commands.registerCommand('csharpextensions.createDbContext', createDbContext));
+    context.subscriptions.push(vscode.commands.registerCommand('csharpextensions.createApiController', createApiController));
     context.subscriptions.push(vscode.commands.registerCommand('csharpextensions.createInterface', createInterface));
 
     const codeActionProvider = new CodeActionProvider();
@@ -40,6 +42,16 @@ export function activate(context: vscode.ExtensionContext) {
 
 function createClass(args) {
     promptAndSave(args, 'class');
+}
+
+function createApiController(args)
+{
+    promptAndSave(args, 'apicontroller');
+}
+
+function createDbContext(args)
+{
+    promptAndSave(args, 'dbcontext');
 }
 
 function createInterface(args) {
@@ -132,11 +144,12 @@ function openTemplateAndSaveNewFile(type: string, namespace: string, filename: s
 
     let templatefileName = type + '.tmpl';
 
-    vscode.workspace.openTextDocument(vscode.extensions.getExtension('jchannon.csharpextensions').extensionPath + '/templates/' + templatefileName)
+    vscode.workspace.openTextDocument(vscode.extensions.getExtension('mavusi.csharpextensions').extensionPath + '/templates/' + templatefileName)
         .then((doc: vscode.TextDocument) => {
             let text = doc.getText();
-            text = text.replace('${namespace}', namespace);
-            text = text.replace('${classname}', filename);
+            text = text.replace(new RegExp('@classname@', 'g'),filename);
+            text = text.replace('@namespace@', namespace);
+            //text = text.replace('${classname}', filename);
             let cursorPosition = findCursorInTemlpate(text);
             text = text.replace('${cursor}', '');
             fs.writeFileSync(originalfilepath, text);

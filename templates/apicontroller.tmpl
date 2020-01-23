@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace @namespace@
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class @classname@Controller : ControllerBase
+    {
+        private readonly ILogger<Controller> _logger;
+        public @classname@Controller(ILogger<Controller> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+            ${cursor}
+            Return Ok();
+        }
+    }
+
+}
