@@ -4,6 +4,10 @@ This is a fork of https://github.com/jchannon/csharpextensions seeing as that ex
 
 Welcome to C# Extensions.  This VSCode extension provides extensions to the IDE that will hopefully speed up your development workflow.
 
+# What's new in v1.3.1
+- Add EF DbContext
+- Add Asp.Net ApiController
+
 ## Features
 
 **Add C# Class**
