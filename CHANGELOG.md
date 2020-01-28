@@ -1,5 +1,9 @@
 # Change Log
-All notable changes to this project will be documented in this file.
+
+## [1.3.1] - 2020-01-23
+### Added
+- EF DbContext template
+- WebApi template
 
 ## [1.3.0] - 2017-03-01
 ### Added

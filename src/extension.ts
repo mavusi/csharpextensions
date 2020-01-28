@@ -34,6 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand('csharpextensions.createDbContext', createDbContext));
     context.subscriptions.push(vscode.commands.registerCommand('csharpextensions.createApiController', createApiController));
     context.subscriptions.push(vscode.commands.registerCommand('csharpextensions.createInterface', createInterface));
+    context.subscriptions.push(vscode.commands.registerCommand('csharpextensions.createJsonApiClientBase', createJsonApiClientBase));
 
     const codeActionProvider = new CodeActionProvider();
     let disposable = vscode.languages.registerCodeActionsProvider(documentSelector, codeActionProvider);
@@ -56,6 +57,11 @@ function createDbContext(args)
 
 function createInterface(args) {
     promptAndSave(args, 'interface');
+}
+
+function createJsonApiClientBase(args)
+{
+    promptAndSave(args,'jsonapiclientbase');
 }
 
 function promptAndSave(args, templatetype: string) {

@@ -1,0 +1,52 @@
+namespace @namespace@
+{
+    using Newtonsoft.Json;
+    using System;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    public class JsonApiClientBase
+    {
+        private static readonly HttpClient client = InitializeClient(); 
+        public JsonApiClientBase()
+        {
+            
+        }
+
+        private static HttpClient InitializeClient()
+        {
+            var c = new HttpClient()
+            {
+                BaseAddress = new Uri("${cursor}")
+            };
+            //uncomment the following line if the API requires authentication
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", "{Token}");
+            return c;
+        }
+
+        protected async Task<T> Get<T>(string Uri) where T : new()
+        {
+            var resp = await client.GetAsync(Uri);
+            var res = await resp.Content.ReadAsStringAsync();
+            var ret = JsonConvert.DeserializeObject<T>(res);
+            return ret;
+        }
+
+        protected async Task Post<T>(string Uri, T model) where T : new()
+        {
+            await client.PostAsync(Uri, new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json"));
+        }
+
+        protected async Task Put<T>(string Uri, T model) where T : new()
+        {
+            await client.PutAsync(Uri, new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json"));
+        }
+
+        protected async Task Delete(string Uri)
+        {
+            await client.DeleteAsync(Uri);
+        }
+    }
+}
